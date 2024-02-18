@@ -21,7 +21,6 @@ export default function Verify(props: Props) {
       const { error, message } = apiRes as { message: string; error: string };
       if (res.ok) {
         toast.success(message);
-        router.replace("/");
       } else if (error) {
         toast.error(error);
       }

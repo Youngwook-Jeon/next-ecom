@@ -45,11 +45,10 @@ export default function SignUp() {
       if (res.ok) {
         toast.success(message);
         await signIn("credentials", { email, password });
-      }
-
-      if (!res.ok && error) {
+      } else if (error) {
         toast.error(error);
       }
+
       action.setSubmitting(false);
     },
   });

@@ -12,8 +12,6 @@ export default function Verify(props: Props) {
   const { token, userId } = props.searchParams;
   const router = useRouter();
 
-  if (!token || !userId) return redirect("/404");
-
   useEffect(() => {
     fetch("/api/users/verify", {
       method: "POST",
@@ -30,6 +28,8 @@ export default function Verify(props: Props) {
       router.replace("/");
     });
   }, []);
+
+  if (!token || !userId) return redirect("/404");
 
   return (
     <div className="text-3xl opacity-70 text-center p-5 animate-pulse">

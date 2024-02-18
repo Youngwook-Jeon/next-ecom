@@ -8,6 +8,7 @@ interface Auth {
 
 export default function useAuth(): Auth {
   const session = useSession();
+  
   return {
     loading: session.status === 'loading',
     loggedIn: session.status === 'authenticated',

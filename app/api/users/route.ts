@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { NewUserRequest } from "@/app/types";
 import crypto from "crypto";
 import EmailVerificationToken from "@models/emailVerificationToken";
-import { sendEmail } from "@/app/lib/email";
+import { sendEmail } from "@lib/email";
 
 export const POST = async (req: Request) => {
   const body = (await req.json()) as NewUserRequest;

@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
-import EmailVerificationBanner from "../components/EmailVerificationBanner";
+import EmailVerificationBanner from "@components/EmailVerificationBanner";
 
 interface Props {
   children: ReactNode;

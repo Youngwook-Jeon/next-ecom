@@ -15,30 +15,30 @@ export default function Create() {
   const handleCreateProduct = async (values: NewProductInfo) => {
     try {
       const { thumbnail, images } = values;
-      // await newProductInfoSchema.validate(values, { abortEarly: false });
+      await newProductInfoSchema.validate(values, { abortEarly: false });
       const thumbnailRes = await uploadImage(thumbnail!);
 
-      // let productImages: { url: string; id: string }[] = [];
-      // if (images) {
-      //   const uploadPromise = images.map(async (imageFile) => {
-      //     const { id, url } = await uploadImage(imageFile);
-      //     return { id, url };
-      //   });
+      let productImages: { url: string; id: string }[] = [];
+      if (images) {
+        const uploadPromise = images.map(async (imageFile) => {
+          const { id, url } = await uploadImage(imageFile);
+          return { id, url };
+        });
 
-      //   productImages = await Promise.all(uploadPromise);
-      // }
+        productImages = await Promise.all(uploadPromise);
+      }
 
-      // await createProduct({
-      //   ...values,
-      //   price: {
-      //     base: values.mrp,
-      //     discounted: values.salePrice,
-      //   },
-      //   thumbnail: thumbnailRes,
-      //   images: productImages,
-      // });
-      // router.refresh();
-      // router.push("/products");
+      await createProduct({
+        ...values,
+        price: {
+          base: values.mrp,
+          discounted: values.salePrice,
+        },
+        thumbnail: thumbnailRes,
+        images: productImages,
+      });
+      router.refresh();
+      router.push("/products");
     } catch (error) {
       if (error instanceof ValidationError) {
         error.inner.map((err) => {
@@ -51,9 +51,6 @@ export default function Create() {
   return (
     <div>
       <ProductForm onSubmit={handleCreateProduct} />
-      {/* <ProductForm onSubmit={(values) => {
-        console.log(values);
-      }} /> */}
     </div>
   );
 }

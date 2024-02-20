@@ -1,5 +1,9 @@
+import ProductTable from "@components/ProductTable";
+
 export default function Products() {
   return (
-    <div>Products</div>
+    <div>
+      <ProductTable />
+    </div>
   )
 }

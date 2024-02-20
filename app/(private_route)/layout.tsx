@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import EmailVerificationBanner from "@components/EmailVerificationBanner";
+import Navbar from "@components/navbar";
 
 interface Props {
   children: ReactNode;
@@ -9,11 +10,14 @@ interface Props {
 
 export default async function PrivateLayout({ children }: Props) {
   const session = await auth();
-  
+
   if (!session) return redirect("/auth/signin");
 
-  return <div className="max-w-screen-xl mx-auto p-4 xl:p-0">
-    <EmailVerificationBanner />
-    {children}
-  </div>;
+  return (
+    <div className="max-w-screen-xl mx-auto p-4 xl:p-0">
+      <Navbar />
+      <EmailVerificationBanner />
+      {children}
+    </div>
+  );
 }

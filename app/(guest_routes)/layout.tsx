@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
+import Navbar from "@components/navbar";
 
 interface Props {
   children: ReactNode;
@@ -8,8 +9,13 @@ interface Props {
 
 export default async function GuestLayout({ children }: Props) {
   const session = await auth();
-  
+
   if (session) return redirect("/");
 
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  );
 }

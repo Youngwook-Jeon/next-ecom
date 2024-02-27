@@ -11,7 +11,8 @@ import { updateProductInfoSchema } from "@utils/validationSchema";
 import { ValidationError } from "yup";
 import { toast } from "react-toastify";
 import { extractPublicId, uploadImage } from "@utils/helper";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 interface Props {
   product: ProductResponse;
@@ -19,6 +20,9 @@ interface Props {
 
 export default function UpdateProduct({ product }: Props) {
   const router = useRouter();
+  const params = useSearchParams();
+  let returnPage = params.get("returnPage");
+  const p = returnPage ? +returnPage : 1;
 
   const initialValue: InitialValue = {
     ...product,
@@ -68,7 +72,7 @@ export default function UpdateProduct({ product }: Props) {
       await updateProduct(product.id, dataToUpdate);
       
       router.refresh();
-      router.push("/products");
+      router.push(`/products?page=${p}`);
     } catch (error) {
       if (error instanceof ValidationError) {
         error.inner.map((err) => {

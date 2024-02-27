@@ -174,7 +174,7 @@ export default function ProductTable(props: Props) {
                     </div>
                   </td>
                   <td className={classes}>
-                    <Link href={`/products/update/${id}`}>
+                    <Link href={`/products/update/${id}?returnPage=${currentPageNo}`}>
                       <IconButton variant="text" color="blue-gray">
                         <PencilIcon className="h-4 w-4" />
                       </IconButton>

@@ -85,3 +85,59 @@ export interface ProductToUpdate {
   thumbnail?: { url: string; id: string };
   images?: { url: string; id: string }[];
 }
+
+export interface NewCartRequest {
+  productId: string;
+  quantity: number;
+}
+
+export interface NewFeaturedProduct {
+  banner: { url: string; id: string };
+  link: string;
+  linkTitle: string;
+  title: string;
+}
+
+export interface FeaturedProductForUpdate {
+  banner?: { url: string; id: string };
+  link: string;
+  linkTitle: string;
+  title: string;
+}
+
+export interface UserProfileToUpdate {
+  avatar?: { url: string; id: string };
+  name: string;
+  id: string;
+}
+
+export interface CartProduct {
+  id: string;
+  thumbnail: string;
+  title: string;
+  price: number;
+  totalPrice: number;
+  qty: number;
+}
+
+export interface CartItems {
+  products: CartProduct[];
+  id: string;
+  totalQty: number;
+  totalPrice: number;
+}
+
+export interface StripeCustomer {
+  metadata: {
+    userId: string;
+    cartId: string;
+    type: "checkout" | "instant-checkout";
+    product: string;
+  };
+}
+
+export interface ReviewRequestBody {
+  productId: string;
+  comment?: string;
+  rating: number;
+}

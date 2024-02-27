@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 let connection: typeof mongoose;
 
-const url = "mongodb://127.0.0.1:27017/next_ecom";
+const url = process.env.MONGO_URL!;
+
 const startDb = async () => {
   try {
     if (!connection) {

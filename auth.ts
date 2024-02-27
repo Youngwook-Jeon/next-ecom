@@ -8,6 +8,8 @@ declare module "next-auth" {
   }
 }
 
+const SERVICE_URI = process.env.SERVICE_URI!;
+
 const authConfig: NextAuthConfig = {
   providers: [
     CredentialsProvider({
@@ -16,7 +18,7 @@ const authConfig: NextAuthConfig = {
       async authorize(credentials, request) {
         const { email, password } = credentials as SignInCredentials;
         const { user, error } = await fetch(
-          "http://localhost:3000/api/users/signin",
+          `${SERVICE_URI}/api/users/signin`,
           {
             method: "POST",
             body: JSON.stringify({ email, password }),

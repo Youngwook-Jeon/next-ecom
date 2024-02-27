@@ -1,6 +1,6 @@
 import BuyingOptions from "@components/BuyingOptions";
 import { formatPrice } from "../utils/helper";
-// import ProductImageGallery from "@components/ProductImageGallery";
+import ProductImageGallery from "@components/ProductImageGallery";
 // import Rating from "./Rating";
 
 interface Props {
@@ -30,7 +30,7 @@ export default function ProductView({
     <div className="flex lg:flex-row flex-col md:gap-4 gap-2">
       <div className="flex-1 lg:self-start self-center relative">
         {/* Product Image Slider */}
-        {/* <ProductImageGallery images={images} /> */}
+        <ProductImageGallery images={images} />
       </div>
 
       <div className="flex-1 md:space-y-4 space-y-2">

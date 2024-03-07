@@ -1,7 +1,25 @@
-import { auth } from "@/auth";
 import NavUI from "./NavUI";
+import { auth } from "@/auth";
 import CartModel from "@models/cartModel";
 import { Types } from "mongoose";
+import startDb from "@lib/db";
+import UserModel from "@models/userModel";
+
+const fetchUserProfile = async () => {
+  const session = await auth();
+  if (!session) return null;
+
+  await startDb();
+  const user = await UserModel.findById(session.user.id);
+  if (!user) return null;
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    avatar: user.avatar?.url,
+    verified: user.verified,
+  };
+};
 
 const getCartItemsCount = async () => {
   try {
@@ -20,24 +38,24 @@ const getCartItemsCount = async () => {
         },
       },
     ]);
-
     if (cart.length) {
       return cart[0].totalQuantity;
+    } else {
+      return 0;
     }
-
-    return 0;
   } catch (error) {
-    console.log("Error while fetching cart items.", error);
+    console.log("Error while fetching cart items count: ", error);
     return 0;
   }
 };
 
 export default async function Navbar() {
   const cartItemsCount = await getCartItemsCount();
+  const profile = await fetchUserProfile();
 
   return (
     <div>
-      <NavUI cartItemsCount={cartItemsCount} />
+      <NavUI cartItemsCount={cartItemsCount} avatar={profile?.avatar} />
     </div>
   );
 }

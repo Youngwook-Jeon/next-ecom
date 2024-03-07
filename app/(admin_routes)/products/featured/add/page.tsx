@@ -1,5 +1,5 @@
 import FeaturedProductForm from "@components/FeaturedProductForm";
-// import FeaturedProductTable from "@components/FeaturedProductTable";
+import FeaturedProductTable from "@components/FeaturedProductTable";
 import startDb from "@lib/db";
 import FeaturedProductModel from "@models/featuredProduct";
 
@@ -22,7 +22,7 @@ export default async function AddFeaturedProduct() {
   return (
     <div>
       <FeaturedProductForm />
-      {/* <FeaturedProductTable products={featuredProducts} /> */}
+      <FeaturedProductTable products={featuredProducts} />
     </div>
   );
 }

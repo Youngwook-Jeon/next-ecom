@@ -1,7 +1,8 @@
-import ProductView from "@/app/components/ProductView";
+import ProductView from "@components/ProductView";
 import startDb from "@lib/db";
 import ProductModel from "@models/productModel";
 import { isValidObjectId } from "mongoose";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 interface Props {
@@ -50,6 +51,15 @@ export default async function Product({ params }: Props) {
         outOfStock={productInfo.outOfStock}
         isWishlist={productInfo.isWishlist}
       />
+
+      <div className="py-4 space-y-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-semibold mb-2">Reviews</h1>
+          <Link href={`/add-review/${productInfo.id}`}>Add Review</Link>
+        </div>
+
+        {/* <ReviewsList reviews={JSON.parse(reviews)} /> */}
+      </div>
     </div>
   );
 }

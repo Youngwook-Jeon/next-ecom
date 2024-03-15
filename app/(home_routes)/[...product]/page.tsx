@@ -1,8 +1,8 @@
 import ProductView from "@components/ProductView";
 import ReviewsList from "@components/ReviewsList";
-// import SimilarProductsList from "@components/SimilarProductsList";
+import SimilarProductsList from "@components/SimilarProductsList";
 import startDb from "@lib/db";
-// import { updateOrCreateHistory } from "@models/historyModel";
+import { updateOrCreateHistory } from "@models/historyModel";
 import ProductModel from "@models/productModel";
 import ReviewModel from "@models/reviewModel";
 // import WishlistModel from "@models/wishlistModel";
@@ -28,7 +28,7 @@ const fetchProduct = async (productId: string) => {
 
   const session = await auth();
   if (session?.user) {
-    // await updateOrCreateHistory(session.user.id, product._id.toString());
+    await updateOrCreateHistory(session.user.id, product._id.toString());
     // const wishlist = await WishlistModel.findOne({
     //   user: session.user.id,
     //   products: product._id,
@@ -114,7 +114,7 @@ export default async function Product({ params }: Props) {
         isWishlist={productInfo.isWishlist}
       />
 
-      {/* <SimilarProductsList products={similarProducts} /> */}
+      <SimilarProductsList products={similarProducts} />
 
       <div className="py-4 space-y-4">
         <div className="flex justify-between items-center">

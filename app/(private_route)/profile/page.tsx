@@ -1,37 +1,37 @@
 import EmailVerificationBanner from "@/app/components/EmailVerificationBanner";
-// import OrderListPublic, { Orders } from "@components/OrderListPublic";
+import OrderListPublic, { Orders } from "@components/OrderListPublic";
 import ProfileForm from "@components/ProfileForm";
 import startDb from "@lib/db";
-// import OrderModel from "@models/orderModel";
+import OrderModel from "@models/orderModel";
 import UserModel from "@models/userModel";
 import { auth } from "@/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-// const fetchLatestOrder = async () => {
-//   const session = await auth();
+const fetchLatestOrder = async () => {
+  const session = await auth();
 
-//   if (!session?.user) {
-//     return redirect("/auth/signin");
-//   }
+  if (!session?.user) {
+    return redirect("/auth/signin");
+  }
 
-//   await startDb();
-//   const orders = await OrderModel.find({ userId: session.user.id })
-//     .sort("-createdAt")
-//     .limit(1);
-//   const result: Orders[] = orders.map((order) => {
-//     return {
-//       id: order._id.toString(),
-//       paymentStatus: order.paymentStatus,
-//       date: order.createdAt.toString(),
-//       total: order.totalAmount,
-//       deliveryStatus: order.deliveryStatus,
-//       products: order.orderItems,
-//     };
-//   });
+  await startDb();
+  const orders = await OrderModel.find({ userId: session.user.id })
+    .sort("-createdAt")
+    .limit(1);
+  const result: Orders[] = orders.map((order) => {
+    return {
+      id: order._id.toString(),
+      paymentStatus: order.paymentStatus,
+      date: order.createdAt.toString(),
+      total: order.totalAmount,
+      deliveryStatus: order.deliveryStatus,
+      products: order.orderItems,
+    };
+  });
 
-//   return JSON.stringify(result);
-// };
+  return JSON.stringify(result);
+};
 
 const fetchUserProfile = async () => {
   const session = await auth();
@@ -51,7 +51,7 @@ const fetchUserProfile = async () => {
 
 export default async function Profile() {
   const profile = await fetchUserProfile();
-  // const order = JSON.parse(await fetchLatestOrder());
+  const order = JSON.parse(await fetchLatestOrder());
 
   return (
     <div>
@@ -76,7 +76,7 @@ export default async function Profile() {
             </Link>
           </div>
 
-          {/* <OrderListPublic orders={order} /> */}
+          <OrderListPublic orders={order} />
         </div>
       </div>
     </div>

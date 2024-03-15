@@ -17,7 +17,7 @@ import useAuth from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useTransition } from "react";
-// import Rating from "./Rating";
+import Rating from "./Rating";
 
 export interface Product {
   id: string;
@@ -89,11 +89,11 @@ export default function ProductCard({ product }: Props) {
             <h3 className="line-clamp-1 font-medium text-blue-gray-800">
               {truncate(product.title, 50)}
             </h3>
-            {/* <div className="flex justify-end">
+            <div className="flex justify-end">
               {product.rating ? (
                 <Rating value={parseFloat(product.rating.toFixed(1))} />
               ) : null}
-            </div> */}
+            </div>
           </div>
           <div className="flex justify-end items-center space-x-2 mb-2">
             <Typography color="blue-gray" className="font-medium line-through">

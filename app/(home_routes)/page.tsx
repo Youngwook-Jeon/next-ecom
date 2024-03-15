@@ -1,8 +1,8 @@
-import FeaturedProductsSlider from "@components/FeaturedProductsSlider";
-import GridView from "@components/GridView";
-import ProductCard from "@components/ProductCard";
 import startDb from "@lib/db";
 import ProductModel from "@models/productModel";
+import GridView from "@components/GridView";
+import ProductCard from "@components/ProductCard";
+import FeaturedProductsSlider from "@components/FeaturedProductsSlider";
 import FeaturedProductModel from "@models/featuredProduct";
 import CategoryMenu from "@components/CategoryMenu";
 
@@ -21,9 +21,9 @@ interface LatestProduct {
 
 const fetchLatestProducts = async () => {
   await startDb();
-  const products = await ProductModel.find().sort("-createdAt").limit(10);
+  const products = await ProductModel.find().sort("-createdAt").limit(20);
 
-  const productsList = products.map((product) => {
+  const productList = products.map((product) => {
     return {
       id: product._id.toString(),
       title: product.title,
@@ -32,10 +32,11 @@ const fetchLatestProducts = async () => {
       thumbnail: product.thumbnail.url,
       price: product.price,
       sale: product.sale,
+      rating: product.rating,
     };
   });
 
-  return JSON.stringify(productsList);
+  return JSON.stringify(productList);
 };
 
 const fetchFeaturedProducts = async () => {

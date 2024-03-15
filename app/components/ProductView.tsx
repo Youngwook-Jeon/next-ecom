@@ -1,7 +1,7 @@
 import BuyingOptions from "@components/BuyingOptions";
 import { formatPrice } from "../utils/helper";
 import ProductImageGallery from "@components/ProductImageGallery";
-// import Rating from "./Rating";
+import Rating from "./Rating";
 
 interface Props {
   title: string;
@@ -43,7 +43,7 @@ export default function ProductView({
           })}
         </div>
 
-        {/* {rating ? <Rating value={parseFloat(rating.toFixed(1))} /> : null} */}
+        {rating ? <Rating value={parseFloat(rating.toFixed(1))} /> : null}
 
         <div className="flex items-center space-x-2 mb-2">
           <p className="line-through text-xl">{formatPrice(price.base)}</p>

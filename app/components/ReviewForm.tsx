@@ -38,6 +38,8 @@ export default function ReviewForm({ productId, initialValue }: Props) {
     if (!res.ok) {
       return toast.error(error);
     }
+
+    return toast.success("Your review is successfully created.");
   };
 
   useEffect(() => {

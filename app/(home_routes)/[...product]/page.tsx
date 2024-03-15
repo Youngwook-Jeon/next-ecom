@@ -5,7 +5,7 @@ import startDb from "@lib/db";
 import { updateOrCreateHistory } from "@models/historyModel";
 import ProductModel from "@models/productModel";
 import ReviewModel from "@models/reviewModel";
-// import WishlistModel from "@models/wishlistModel";
+import WishlistModel from "@models/wishlistModel";
 import { auth } from "@/auth";
 import { ObjectId, isValidObjectId } from "mongoose";
 import Link from "next/link";
@@ -29,11 +29,11 @@ const fetchProduct = async (productId: string) => {
   const session = await auth();
   if (session?.user) {
     await updateOrCreateHistory(session.user.id, product._id.toString());
-    // const wishlist = await WishlistModel.findOne({
-    //   user: session.user.id,
-    //   products: product._id,
-    // });
-    // isWishlist = wishlist ? true : false;
+    const wishlist = await WishlistModel.findOne({
+      user: session.user.id,
+      products: product._id,
+    });
+    isWishlist = wishlist ? true : false;
   }
 
   return JSON.stringify({

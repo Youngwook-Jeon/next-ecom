@@ -6,7 +6,7 @@ import CartCountUpdater from "@components/CartCountUpdater";
 import { useParams, useRouter } from "next/navigation";
 import useAuth from "@hooks/useAuth";
 import { toast } from "react-toastify";
-// import Wishlist from "@ui/Wishlist";
+import Wishlist from "@ui/Wishlist";
 
 interface Props {
   wishlist?: boolean;
@@ -84,13 +84,12 @@ export default function BuyingOptions({ wishlist }: Props) {
 
       <Button
         onClick={() => {
-          //   startTransition(async () => await updateWishlist());
+            startTransition(async () => await updateWishlist());
         }}
         variant="text"
         disabled={isPending}
       >
-        Wishlist
-        {/* <Wishlist isActive={wishlist} /> */}
+        <Wishlist isActive={wishlist} />
       </Button>
     </div>
   );

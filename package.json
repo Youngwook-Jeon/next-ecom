@@ -26,6 +26,7 @@
     "react-horizontal-scrolling-menu": "^6.0.2",
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.4",
+    "recharts": "^2.12.2",
     "slick-carousel": "^1.8.1",
     "stripe": "^14.20.0",
     "truncate": "^3.0.0",
